@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+{% for k, v in students.items() %}
+<br>{{k}} has {{v}} as note
+{% endfor %}
+<br />
+<p>Add a student:</p>
+<form action="/students" method="post">
+    <p>
+        <input type="text" name="student_name">
+        <input type="text" name="student_note">
+        <input type="submit" value=submit>
+    </p>
+</form>
+{% endblock %}

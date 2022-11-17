@@ -1,0 +1,49 @@
+html {
+    font-family: 'Verdana';
+}
+  
+body {
+    height: 100%;
+    color: #1A1919;
+    background-color: #EAECEE ;
+}
+  
+.content {
+    max-width: 64rem;
+    margin-left: 25rem;
+    font-size: 1rem;
+}
+
+#wrapper_form {
+	width: 75%;
+	margin: auto;
+	margin-top: 10px;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+textarea[name="post"] {
+    padding: 10px;
+    border: none;
+    height: 150px;
+    width: 700px;
+    font-size: 1.4rem;
+}
+
+#wrapper_posts{
+    background-color: tan;
+	width: 75%;
+	margin: auto;
+	margin-top: 10px;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+#posts {
+    padding: 10px;
+    background-color: #fff;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8rem;
+}
+

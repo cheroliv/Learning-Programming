@@ -1,0 +1,36 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20rem;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #1A1919;
+  color:#fff;
+}
+
+
+/* Sidebar nav */
+.sidebar-nav {
+  padding-left: 0;
+  list-style: none;
+}
+
+/* Sidebar links */
+.sidebar a {
+  color: #fff;
+}
+
+.sidebar h1 {
+  color: #fff;
+  margin-top: 10;
+  font-size: 3rem;
+}
+
+/* Lists */
+li {
+  margin-top: 0;
+  margin-bottom: 1.0rem;
+}
