@@ -112,8 +112,8 @@ public final class ControllerMaze {
   @FXML
   private void draw() {
     if (result != null) {
-      double time   = cmbTimes.getValue().doubleValue() * 1000;
-      int    length = maze.path.size();
+      var time   = cmbTimes.getValue().doubleValue() * 1000;
+      var length = maze.path.size();
 
       if (length > 1) {
         maze.path.remove(maze.start);
@@ -155,12 +155,12 @@ public final class ControllerMaze {
   }
 
   private void initLogic() {
-    int    dim     = cmbCellSizes.getValue().intValue();
-    double density = Double.parseDouble(densities.getText());
-    int    width   = (int) (gridLayer.getWidth() / dim);
-    int    heigth  = (int) (gridLayer.getHeight() / dim);
+    var dim     = cmbCellSizes.getValue().intValue();
+    var density = Double.parseDouble(densities.getText());
+    var width   = 1280 / dim;
+    var height  = 720 / dim;
 
-    maze = new MazeGrid2D(width, heigth, density);
+    maze = new MazeGrid2D(width, height, density);
     maze.setAlgorithm(algorithm);
     maze.setAdjacentCells();
   }
@@ -171,13 +171,13 @@ public final class ControllerMaze {
   }
 
   private void initView() {
-    int dim = cmbCellSizes.getValue().intValue();
+    var dim = cmbCellSizes.getValue().intValue();
 
     cmbCells.setValue(START);
     pathFound.setText("- - - - -");
     pathLength.setText("0");
     ViewMaze.setDim(dim);
-    ViewMaze.reset(gridLayer.getWidth(), gridLayer.getHeight());
+    ViewMaze.reset(1280, 720);
     ViewMaze.drawMaze(maze);
     ViewMaze.drawGrid();
     onCanvasPressed(dim);
