@@ -3,6 +3,7 @@ package fr.chalodss.app;
 import static fr.chalodss.utils.Constants.*;
 
 import fr.chalodss.classes.fractals.sierpinski.ControllerFST;
+import fr.chalodss.classes.gameoflife.ControllerGOL;
 import fr.chalodss.classes.graphs.mazes.ControllerMaze;
 
 import java.io.IOException;
@@ -49,6 +50,7 @@ public final class Controller {
       case BFS      -> addMenu("/ViewMaze.fxml", algorithm);
       case DFS      -> addMenu("/ViewMaze.fxml", algorithm);
       case DIJKSTRA -> addMenu("/ViewMaze.fxml", algorithm);
+      case GOL      -> addMenu("/ViewGOL.fxml", algorithm);
       case ST       -> addMenu("/ViewFST.fxml", algorithm);
       default       -> throw new IllegalArgumentException();
     }
@@ -74,6 +76,7 @@ public final class Controller {
       case BFS      -> loader.setController(new ControllerMaze(board, BFS));
       case DFS      -> loader.setController(new ControllerMaze(board, DFS));
       case DIJKSTRA -> loader.setController(new ControllerMaze(board, DIJKSTRA));
+      case GOL      -> loader.setController(new ControllerGOL(board));
       case ST       -> loader.setController(new ControllerFST(board));
       default       -> throw new IllegalArgumentException();
     }
