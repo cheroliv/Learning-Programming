@@ -28,7 +28,7 @@
             <Insets left="5.0" top="45.0" />
          </GridPane.margin>
       </Label>
-      <Label prefHeight="25.0" prefWidth="70.0" text="Time (s)" textFill="#333333" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Label prefHeight="25.0" prefWidth="70.0" text="Time (s)" textFill="#333333" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -57,7 +57,7 @@
             <Insets left="80.0" top="80.0" />
          </GridPane.margin>
       </Label>
-      <Label prefHeight="25.0" prefWidth="70.0" text="Density" textFill="#333333" GridPane.valignment="TOP">
+      <Label prefHeight="25.0" prefWidth="70.0" text="Density" textFill="#333333" GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -128,7 +128,7 @@
             <Insets right="5.0" top="45.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label prefHeight="25.0" prefWidth="70.0" text="Maze size" textFill="#333333" GridPane.valignment="TOP">
+      <Label prefHeight="25.0" prefWidth="70.0" text="Maze size" textFill="#333333" GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -152,7 +152,7 @@
             <Insets top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label prefHeight="25.0" text="Path length:" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <Label prefHeight="25.0" text="Path length:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <padding>
             <Insets left="5.0" />
          </padding>
