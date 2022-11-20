@@ -61,11 +61,8 @@ public final class Controller {
     try {
       var loader = new FXMLLoader(getClass().getResource(view));
       setController(loader, algorithm);
-
       newMenu = loader.load();
       leftMenu.getChildren().add(newMenu);
-      newMenu.setLayoutY(150);
-      newMenu.setPrefHeight(leftMenu.getHeight() - 150);
     } catch (IOException e) {
       e.printStackTrace();
     }
