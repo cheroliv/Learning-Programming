@@ -10,7 +10,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -33,9 +32,8 @@ public final class Controller {
   @FXML
   private Label            winner;
 
-  private GraphicsContext  gc;
-
   private Game             game;
+
 
   public Controller() {
 
@@ -43,9 +41,8 @@ public final class Controller {
 
   @FXML
   private void initialize() {
-    gc = board.getGraphicsContext2D();
     level.setItems(FXCollections.observableList(Arrays.asList(RANDOM, PERFECT)));
-    View.setGc(gc);
+    View.setGc(board.getGraphicsContext2D());
   }
 
   @FXML
@@ -62,7 +59,6 @@ public final class Controller {
     board.setOnMouseClicked(this::getInputs);
     drawBoard();
     new Thread(game).start();
-
   }
 
   private void reset() {
@@ -70,13 +66,13 @@ public final class Controller {
     game.move = END;
     game.winner.set("-------");
     game.cancel();
-    View.setGc(gc);
+    View.setGc(board.getGraphicsContext2D());
   }
 
   private void getInputs(MouseEvent e) {
     if (!game.end) {
-      int i = (e.getX() < CASE_W) ? 0 : (e.getX() < 500) ? 1 : 2;
-      int j = (e.getY() < CASE_W) ? 0 : (e.getY() < 500) ? 1 : 2;
+      var i = (e.getX() < CASE_W) ? 0 : (e.getX() < 500) ? 1 : 2;
+      var j = (e.getY() < CASE_W) ? 0 : (e.getY() < 500) ? 1 : 2;
       drawMove(CROSS, i, j);
       game.move                        = COMPUTER;
       game.board.grid[j * 3 + i].state = X;

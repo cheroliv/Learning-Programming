@@ -41,7 +41,7 @@ public final class View {
     IntStream.range(1, 3).forEach(i -> gc.strokeLine(i * CASE_W, 0, i * CASE_W, BOARD_W));
     IntStream.range(1, 3).forEach(j -> gc.strokeLine(0, j * CASE_W, BOARD_W, j * CASE_W));
   }
-  
+
   static void reset() {
     gc.clearRect(0, 0, BOARD_W, BOARD_W);
   }

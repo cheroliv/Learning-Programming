@@ -52,7 +52,7 @@ public final class Game extends Task<Void> {
   }
 
   private boolean isEndGame() {
-    int w = board.hasWon();
+    var w = board.hasWon();
 
     end = (w != 0) || (nbMoves == 0);
     if (end) {
