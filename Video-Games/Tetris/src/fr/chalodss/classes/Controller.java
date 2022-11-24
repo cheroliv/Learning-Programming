@@ -7,7 +7,6 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -21,23 +20,21 @@ import javafx.scene.text.Text;
 public final class Controller {
 
   @FXML
-  private Pane            board;
+  private Pane           board;
   @FXML
-  private Text            score;
+  private Text           score;
   @FXML
-  private Text            level;
+  private Text           level;
   @FXML
-  private CheckBox        aiMode;
+  private CheckBox       aiMode;
   @FXML
-  private Canvas          background;
+  private Canvas         background;
 
-  private GraphicsContext gcTetro;
+  private LongProperty   timeInterval;
 
-  private LongProperty    timeInterval;
+  private AnimationTimer loop;
 
-  private AnimationTimer  loop;
-
-  private Game            game;
+  private Game           game;
 
 
   public Controller() {
@@ -46,13 +43,11 @@ public final class Controller {
 
   @FXML
   private void initialize() {
-    GraphicsContext gcBg             = background.getGraphicsContext2D();
-    Canvas          tetroLayerCanvas = new Canvas(350, 700);
+    var tetroLayerCanvas = new Canvas(350, 700);
 
-    Renderer.setGcBg(gcBg);
+    Renderer.setGcBg(background.getGraphicsContext2D());
     Renderer.renderGrid(10, 350, 700);
-    gcTetro= tetroLayerCanvas.getGraphicsContext2D();
-    Renderer.setGcTetro(gcTetro);
+    Renderer.setGcTetro(tetroLayerCanvas.getGraphicsContext2D());
     board.getChildren().add(tetroLayerCanvas);
   }
 
