@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
@@ -35,8 +34,6 @@ public final class ControllerGOL {
   private ComboBox<String>          cmbNames;
   @FXML
   private ComboBox<Number>          cmbTimes;
-  @FXML
-  private TextField                 density;
   @FXML
   private Label                     gridSize;
   @FXML
