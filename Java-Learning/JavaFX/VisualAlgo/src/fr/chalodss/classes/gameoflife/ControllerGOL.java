@@ -31,8 +31,6 @@ public final class ControllerGOL {
   @FXML
   private ComboBox<String>          cmbCellStates;
   @FXML
-  private ComboBox<String>          cmbNames;
-  @FXML
   private ComboBox<Number>          cmbTimes;
   @FXML
   private Label                     gridSize;
