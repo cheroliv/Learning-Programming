@@ -159,10 +159,10 @@ public final class ControllerMaze {
     ViewMaze.reset(1280, 720);
     ViewMaze.drawMaze(maze);
     ViewMaze.drawGrid();
-    onMousePressed(dim);
+    onMouseCliked(dim);
   }
 
-  private void onMousePressed(int dim) {
+  private void onMouseCliked(int dim) {
     gridLayer.setOnMouseClicked(e -> {
       var x    = (int) (e.getX() / dim);
       var y    = (int) (e.getY() / dim);
