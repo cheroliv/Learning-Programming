@@ -153,7 +153,7 @@ public final class ControllerGOL {
             public void handle(long arg) {
               if (Duration.between(start, Instant.now()).toMillis() >= time) {
                 game.update();
-                ViewGOL.drawCells(game.grid, game.newGrid);
+                ViewGOL.drawCells(game.newGrid);
                 game.resetNewGrid();
                 start = Instant.now();
               }

@@ -43,17 +43,6 @@ public final class ViewGOL {
     }
   }
 
-  static void drawCells(BitSet[] grid, BitSet[] prevGrid) {
-    for (var i = 1; i <= height; i++) {
-      for (var j = 1; j <= width; j++) {
-        //if (grid[i].get(j) != prevGrid[i].get(j)) {
-          setCellColor(grid[i].get(j));
-          drawCell(j - 1, i - 1);
-        //}
-      }
-    }
-  }
-
   static void reset() {
     gcGolLayer.clearRect(0, 0, 1280, 720);
     gcGrid.clearRect(0, 0, 1280, 720);
