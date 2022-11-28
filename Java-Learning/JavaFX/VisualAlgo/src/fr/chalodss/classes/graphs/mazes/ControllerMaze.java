@@ -133,27 +133,6 @@ public final class ControllerMaze {
     mazeSize.setText("" + mapSize);
   }
 
-  private void onCanvasPressed(int dim) {
-    gridLayer.setOnMouseClicked(e -> {
-      var x    = (int) (e.getX() / dim);
-      var y    = (int) (e.getY() / dim);
-      var cell = maze.data[y][x];
-
-      if (cell.type != WALL) {
-        cell.type = cmbCells.getValue();
-        ViewMaze.setCellColor(cell.type);
-        ViewMaze.drawCell(cell);
-        switch (cell.type) {
-          case START -> maze.start = maze.data[y][x];
-          case END -> maze.end = maze.data[y][x];
-          default -> throw new IllegalArgumentException();
-        }
-        cell.visited = (cell.type == START);
-        cmbCells.setValue(cell.type == START ? END : WALL);
-      }
-    });
-  }
-
   private void initLogic() {
     var dim     = cmbCellSizes.getValue().intValue();
     var density = Double.parseDouble(densities.getText());
@@ -180,7 +159,28 @@ public final class ControllerMaze {
     ViewMaze.reset(1280, 720);
     ViewMaze.drawMaze(maze);
     ViewMaze.drawGrid();
-    onCanvasPressed(dim);
+    onMousePressed(dim);
+  }
+
+  private void onMousePressed(int dim) {
+    gridLayer.setOnMouseClicked(e -> {
+      var x    = (int) (e.getX() / dim);
+      var y    = (int) (e.getY() / dim);
+      var cell = maze.data[y][x];
+
+      if (cell.type != WALL) {
+        cell.type = cmbCells.getValue();
+        ViewMaze.setCellColor(cell.type);
+        ViewMaze.drawCell(cell);
+        switch (cell.type) {
+          case START -> maze.start = maze.data[y][x];
+          case END -> maze.end = maze.data[y][x];
+          default -> throw new IllegalArgumentException();
+        }
+        cell.visited = (cell.type == START);
+        cmbCells.setValue(cell.type == START ? END : WALL);
+      }
+    });
   }
 
 }
