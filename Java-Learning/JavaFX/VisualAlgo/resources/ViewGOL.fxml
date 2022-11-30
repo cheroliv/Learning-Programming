@@ -51,7 +51,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbTimes" onAction="#updateTime" prefHeight="20.0" prefWidth="115.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <ComboBox fx:id="cmbTimes" prefHeight="20.0" prefWidth="115.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets right="5.0" top="45.0" />
          </GridPane.margin>

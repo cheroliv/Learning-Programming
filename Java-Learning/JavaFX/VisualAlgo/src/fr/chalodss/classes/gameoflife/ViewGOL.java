@@ -56,7 +56,7 @@ public final class ViewGOL {
     ViewGOL.gcGolLayer = gcGolLayer;
   }
 
-  static void setDim(int cellSize) {
+  static void setCellSize(int cellSize) {
     ViewGOL.cellSize = cellSize;
   }
 

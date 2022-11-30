@@ -22,7 +22,7 @@ import javafx.stage.FileChooser;
  */
 public final class ControllerGOL {
 
-  private static final List<Number> SIZES  = Arrays.asList(40, 20, 16, 10, 8, 5, 4, 2);
+  private static final List<Number> SIZES  = Arrays.asList(40, 20, 16, 8, 4, 2);
   private static final List<Number> TIMES  = Arrays.asList(1, 0.1, 0.01);
   private static final List<String> STATES = Arrays.asList("ALIVE", "DEAD");
 
@@ -41,6 +41,8 @@ public final class ControllerGOL {
   private Canvas                    golLayer;
   private Canvas                    gridLayer;
 
+  private int                       cellSize;
+  private String                    cellState;
   private Game                      game;
 
   private AnimationTimer            timer;
@@ -51,6 +53,8 @@ public final class ControllerGOL {
     this.board     = board;
     this.golLayer  = new Canvas();
     this.gridLayer = new Canvas();
+    this.cellState = STATES.get(0);
+    this.time      = 1000;
   }
 
   @FXML
@@ -73,12 +77,17 @@ public final class ControllerGOL {
 
     ViewGOL.setGcGolLayer(golLayer.getGraphicsContext2D());
     ViewGOL.setGcGrid(gridLayer.getGraphicsContext2D());
+
+    cmbCellSizes.valueProperty().addListener(e -> cellSize = cmbCellSizes.getValue().intValue());
+    cmbCellStates.valueProperty().addListener(e -> cellState = cmbCellStates.getValue());
+    cmbTimes.valueProperty().addListener(e -> time = cmbTimes.getValue().doubleValue() * 1000.0);
   }
 
   @FXML
   private void init() {
     initLogic();
     initView();
+    initTimer();
   }
 
   @FXML
@@ -88,15 +97,7 @@ public final class ControllerGOL {
 
   @FXML
   private void updateGridSize() {
-    var cellSize = cmbCellSizes.getValue().intValue();
-    var mapSize  = (1280 * 720) / (cellSize * cellSize);
-
-    gridSize.setText("" + mapSize);
-  }
-
-  @FXML
-  private void updateTime() {
-    time = cmbTimes.getValue().doubleValue() * 1000;
+    gridSize.setText("" + (1280 * 720) / (cellSize * cellSize));
   }
 
   @FXML
@@ -109,10 +110,9 @@ public final class ControllerGOL {
       init();
       fileName.setText(selectedFile.getName());
       lines = Files.readAllLines(Paths.get(selectedFile.getPath()));
-      var cellSize = cmbCellSizes.getValue().intValue();
-      var x        = (1280 / cellSize) / 2 - (lines.get(0).length() / 2);
-      var y        = (720 / cellSize) / 2 - (lines.size() / 2);
-      var i        = y;
+      var x = (1280 / cellSize) / 2 - (lines.get(0).length() / 2);
+      var y = (720 / cellSize) / 2 - (lines.size() / 2);
+      var i = y;
 
       for (var line : lines) {
         for (var j = 0; j < line.length(); j++) {
@@ -128,44 +128,33 @@ public final class ControllerGOL {
   }
 
   private void initLogic() {
-    var cellSize = cmbCellSizes.getValue().intValue();
-    var width    = 1280 / cellSize;
-    var height   = 720 / cellSize;
-
-    game = new Game(width, height);
-    initTimer();
+    game = new Game(1280 / cellSize, 720 / cellSize);
   }
 
   private void initTimer() {
     if (timer != null) {
       timer.stop();
     }
-    updateTime();
     timer = new AnimationTimer() {
-            Instant start = Instant.now();
+      Instant start = Instant.now();
 
-            @Override
-            public void handle(long arg) {
-              if (Duration.between(start, Instant.now()).toMillis() >= time) {
-                game.update();
-                ViewGOL.drawCells(game.newGrid);
-                game.resetNewGrid();
-                start = Instant.now();
-              }
-            }
-          };
+      @Override
+      public void handle(long arg) {
+        if (Duration.between(start, Instant.now()).toMillis() >= time) {
+          game.update();
+          ViewGOL.drawCells(game.newGrid);
+          game.resetNewGrid();
+          start = Instant.now();
+        }
+      }
+    };
   }
 
   private void initView() {
-    var cellSize = cmbCellSizes.getValue().intValue();
-    var state    = cmbCellStates.getValue();
-    var width    = 1280 / cellSize;
-    var height   = 720 / cellSize;
-
-    ViewGOL.setDim(cellSize);
-    ViewGOL.setWidth(width);
-    ViewGOL.setHeight(height);
-    ViewGOL.setCellColor(state);
+    ViewGOL.setCellSize(cellSize);
+    ViewGOL.setWidth(1280 / cellSize);
+    ViewGOL.setHeight(720 / cellSize);
+    ViewGOL.setCellColor(cellState);
     ViewGOL.reset();
     ViewGOL.drawCells(game.grid);
     ViewGOL.drawGrid();
@@ -181,9 +170,9 @@ public final class ControllerGOL {
 
       ViewGOL.setCellColor(state);
       switch (state) {
-        case "ALIVE"    -> game.grid[y + 1].set(x + 1, true);
-        case "DEAD"     -> game.grid[y + 1].set(x + 1, false);
-        default         -> throw new IllegalArgumentException();
+        case "ALIVE" -> game.grid[y + 1].set(x + 1, true);
+        case "DEAD" -> game.grid[y + 1].set(x + 1, false);
+        default -> throw new IllegalArgumentException();
       }
       ViewGOL.drawCell(x, y);
     });
@@ -197,9 +186,9 @@ public final class ControllerGOL {
 
       ViewGOL.setCellColor(state);
       switch (state) {
-        case "ALIVE"    -> game.grid[y + 1].set(x + 1, true);
-        case "DEAD"     -> game.grid[y + 1].set(x + 1, false);
-        default         -> throw new IllegalArgumentException();
+        case "ALIVE" -> game.grid[y + 1].set(x + 1, true);
+        case "DEAD" -> game.grid[y + 1].set(x + 1, false);
+        default -> throw new IllegalArgumentException();
       }
       ViewGOL.drawCell(x, y);
     });
