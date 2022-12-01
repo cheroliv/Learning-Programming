@@ -5,5 +5,5 @@ package fr.chalodss.classes.graphs.mazes;
  * 
  */
 enum ECell {
-  EMPTY, END, PATH, START, WALL
+  START, END, GRASS, MOUNTAIN, PATH, WALL, WATER
 }

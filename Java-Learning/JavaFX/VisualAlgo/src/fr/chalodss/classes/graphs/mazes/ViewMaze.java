@@ -2,7 +2,7 @@ package fr.chalodss.classes.graphs.mazes;
 
 import static fr.chalodss.utils.Constants.BFS;
 import static fr.chalodss.utils.Constants.DFS;
-
+import static fr.chalodss.utils.Constants.DIJKSTRA;
 import java.util.Set;
 import java.util.stream.IntStream;
 import javafx.animation.KeyFrame;
@@ -21,7 +21,7 @@ public final class ViewMaze {
   private static GraphicsContext gcMazeLayer;
   private static Color           color;
   private static Timeline        timeLine;
-  private static double          dim;
+  private static double          cellSize;
 
   private ViewMaze() {
 
@@ -42,17 +42,17 @@ public final class ViewMaze {
   static void drawGrid() {
     gcGrid.setStroke(Color.BLACK);
     gcGrid.setLineWidth(1);
-    IntStream.range(1, (int) (1280 / dim)).forEach(i -> gcGrid.strokeLine(i * dim, 0, i * dim, 720));
-    IntStream.range(1, (int) (720 / dim)).forEach(j -> gcGrid.strokeLine(0, j * dim, 1280, j * dim));
+    IntStream.range(1, (int) (1280 / cellSize)).forEach(i -> gcGrid.strokeLine(i * cellSize, 0, i * cellSize, 720));
+    IntStream.range(1, (int) (720 / cellSize)).forEach(j -> gcGrid.strokeLine(0, j * cellSize, 1280, j * cellSize));
   }
 
   static void drawCell(Cell cell) {
     gcMazeLayer.setFill(color);
-    gcMazeLayer.fillRect(cell.y * dim, cell.x * dim, dim, dim);
+    gcMazeLayer.fillRect(cell.y * cellSize, cell.x * cellSize, cellSize, cellSize);
   }
 
   static void drawMaze(MazeGrid2D maze) {
-    for (var i = 0; i < maze.heigth; i++) {
+    for (var i = 0; i < maze.height; i++) {
       for (var j = 0; j < maze.width; j++) {
         setCellColor(maze.data[i][j].type);
         drawCell(maze.data[i][j]);
@@ -76,25 +76,29 @@ public final class ViewMaze {
     ViewMaze.gcMazeLayer = gcMazeLayer;
   }
 
-  static void setDim(int dim) {
-    ViewMaze.dim = dim;
+  static void setCellSize(int cellSize) {
+    ViewMaze.cellSize = cellSize;
   }
 
   static void setAlgoColor(String algorithm) {
     color = switch (algorithm) {
-      case BFS -> Color.web("#1DE9B6");
-      case DFS -> Color.web("#90CAF9");
-      default  -> throw new IllegalArgumentException();
+      case BFS      -> Color.web("#1DE9B6");
+      case DFS      -> Color.web("#90CAF9");
+      case DIJKSTRA -> Color.web("#E040FB");
+      default       -> throw new IllegalArgumentException();
     };
   }
 
   static void setCellColor(ECell cell) {
     color = switch (cell) {
-      case END -> Color.web("#FF8F00");
-      case PATH -> Color.web("#566573");
-      case START -> Color.web("#76FF03");
-      case WALL -> Color.web("#263238");
-      default -> throw new IllegalArgumentException();
+      case START    -> Color.web("#76FF03");
+      case END      -> Color.web("#FF8F00");
+      case PATH     -> Color.web("#566573");
+      case GRASS    -> Color.web("#27AE60");
+      case MOUNTAIN -> Color.web("#6E2C00");
+      case WALL     -> Color.web("#263238");
+      case WATER    -> Color.web("#3498DB");
+      default       -> throw new IllegalArgumentException();
     };
   }
 
