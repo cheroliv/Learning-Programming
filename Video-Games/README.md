@@ -13,6 +13,7 @@ Ce répertoire contient divers projets que j'ai écrits dans le but d'acquérir 
 - Pong
 - Snake
 - SpaceInvaders
+- TestPlatformer
 - Tetris
 
 
