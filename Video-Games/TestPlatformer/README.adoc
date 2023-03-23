@@ -1,0 +1,14 @@
+= TestPlatformer
+
+pour executer lancer la commande:
+[source,bash]
+----
+./gradlew run
+----
+
+pour changer la version de javafx pour s'accorder a celui de votre systeme. +
+build.gradle.kts.
+[source,kotlin]
+----
+
+----
